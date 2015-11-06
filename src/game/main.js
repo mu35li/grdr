@@ -16,7 +16,12 @@ game.module(
         },
 
         update: function() {
-            this.logo.rotation += (Math.PI * 2 / (1/this.rotSpeed) * game.system.delta);
+            if (game.keyboard.down('RIGHT')) {
+                this.logo.rotation += (Math.PI * 2 / (1/this.rotSpeed) * game.system.delta);
+            }
+            if (game.keyboard.down('LEFT')) {
+                this.logo.rotation -= (Math.PI * 2 / (1/this.rotSpeed) * game.system.delta);
+            }
         }
     });
 
