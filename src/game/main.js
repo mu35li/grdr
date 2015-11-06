@@ -10,6 +10,7 @@ game.module(
 
         init: function() {
             this.logo = new game.Sprite('logo.png').center().addTo(this.stage);
+            this.logo.anchor.set(0.5, 0.5);
         },
 
         update: function() {
