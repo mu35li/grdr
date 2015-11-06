@@ -9,12 +9,13 @@ game.module(
         backgroundColor: 0xb9bec7,
 
         init: function() {
-            this.logo = new game.Sprite('logo.png').center().addTo(this.stage);
+            this.logo = new game.Sprite('logo.png').addTo(this.stage);
             this.logo.anchor.set(0.5, 0.5);
+            this.logo.center();
         },
 
         update: function() {
-            this.logo.rotation += 0.1;
+            this.logo.rotation += (Math.PI * 2 / 10 * game.system.delta);
         }
     });
 
