@@ -53,17 +53,13 @@ game.module(
             //}
 
             this.emitter = new game.Emitter();
-            this.emitter.life = 0;
+            this.emitter.life = 1000;
             this.emitter.velRotate = 25;
             this.emitter.textures.push('beer.png');
             this.emitter.position.set(100, 100);
             this.emitter.positionVar.set(50, 50);
             this.emitter.addTo(game.scene.stage);
             game.scene.addEmitter(this.emitter);
-
-            for (i = 0; i < 20; i++) {
-                this.emitter.addParticle();
-            }
         },
 
         update: function() {
