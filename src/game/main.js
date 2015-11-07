@@ -39,7 +39,8 @@ game.module(
 
             this.body = body;
 
-            this.guenther = new game.Guenther(10,10,200,200);
+            //instanciate the guenther
+            this.guenther = new game.Guenther(0,0,0,0);
             // console.log(this.guenther);
             this.world.addBody(this.guenther.body);
 
@@ -75,9 +76,11 @@ game.module(
 
             if (game.keyboard.down('RIGHT')) {
                 this.logo.rotation += (Math.PI * 2 / (1/this.rotSpeed) * game.system.delta);
+                this.guenther.tiltHead((Math.PI * 2 / (1/this.rotSpeed) * game.system.delta));
             }
             if (game.keyboard.down('LEFT')) {
                 this.logo.rotation -= (Math.PI * 2 / (1/this.rotSpeed) * game.system.delta);
+                this.guenther.tiltHead(-(Math.PI * 2 / (1/this.rotSpeed) * game.system.delta));
             }
             if (game.keyboard.down('SPACE')) {
                 this.guenther.jump();
