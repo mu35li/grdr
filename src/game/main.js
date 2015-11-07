@@ -31,7 +31,7 @@ game.module(
             // declare our score-related variables
             this.finished_bottles = 0;
             this.score = 0;
-            this.drunkenness = 1;
+            this.drunkenness = 2;
             this.drunkhandler = new game.DrunkHandler();
         },
 
