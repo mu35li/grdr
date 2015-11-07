@@ -49,9 +49,6 @@ game.module('game.guenther')
 			this.head.y = this.y;
 		},
 
-		jump: function() {
-			this.body.velocity.add(0,-this.jumpVel);
-		},
 
 		tiltHead: function(angle) {
 			console.log(this.head.rotation);	
