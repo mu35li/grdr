@@ -52,6 +52,9 @@ game.module(
             if (game.keyboard.down('P')) {
                 this.bottle.tiltBottle(-(Math.PI * 2 / (1/this.rotSpeed*2) * game.system.delta));
             }
+            if (game.keyboard.down('T')) {
+                this.bottle.testCollision();
+            }
 
         },
 
