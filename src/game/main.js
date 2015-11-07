@@ -19,7 +19,7 @@ game.module(
             this.world = new game.World();
 
             //instanciate the guenther
-            this.guenther = new game.Guenther(850,600,50,50);
+            this.guenther = new game.Guenther(850,600,40,40);
             this.bottle = new game.Bottle(400,400,100,100);
             // console.log(this.guenther);
             this.world.addBody(this.guenther.drinkBox);
@@ -41,10 +41,10 @@ game.module(
             if (game.keyboard.down('Q')) {
                 this.guenther.tiltHead((Math.PI * 2 / (1/this.rotSpeed) * game.system.delta));
             }
-            if (game.keyboard.down('O')) {
+            if (game.keyboard.down('W')) {
                 this.guenther.tiltHead(-(Math.PI * 2 / (1/this.rotSpeed) * game.system.delta));
             }
-            if (game.keyboard.down('W')) {
+            if (game.keyboard.down('O')) {
                 this.bottle.tiltBottle((Math.PI * 2 / (1/this.rotSpeed*2) * game.system.delta));
             }
             if (game.keyboard.down('P')) {

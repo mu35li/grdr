@@ -42,12 +42,14 @@ game.module('game.bottle')
 			    active: true,
 			    angle: Math.PI*1.5,
 			    angleVar: 0.1,
-			    count: 50,
+			    count: 20,
 			    duration: 0,
-			    life: 2000,
+			    life: 3000,
 			    speed: 100,
 			    speedVar: 10,
 			    rate: 5,
+			    startScale: 2,
+			    webscale: true,
 			    position: particleEmitterPoint
 			});
 			this.particleEmitter.textures.push('beer.png');
