@@ -2,6 +2,7 @@ game.module(
     'game.main'
 )
 .require('game.guenther')
+.require('game.bottle')
 .body(function() {
 
     game.addAsset('logo.png');
@@ -19,6 +20,7 @@ game.module(
 
             //instanciate the guenther
             this.guenther = new game.Guenther(850,600,100,100);
+            this.bottle = new game.Bottle(400,400,100,100);
             // console.log(this.guenther);
             this.world.addBody(this.guenther.body);
 
@@ -48,6 +50,27 @@ game.module(
             this.foam.targetForce = 200;
             this.foam.addTo(game.scene.stage);
             game.scene.addEmitter(this.foam);
+
+            var particleEmitterPoint = new game.Point(400, 400);
+            this.particleEmitter = new game.Emitter({
+                accelAngle: Math.PI/2,
+                accelAngleVar: 0,
+                accelSpeed: 98.1,
+                accelSpeedVar: 2,
+                active: false,
+                angle: Math.PI*1.5,
+                angleVar: 0.1,
+                count: 100,
+                duration: 10000,
+                life: 5000,
+                speed: 100,
+                speedVar: 10,
+                rate: 50,
+                position: particleEmitterPoint
+            });
+            this.particleEmitter.textures.push('beer.png');
+            this.particleEmitter.addTo(game.scene.stage);
+            game.scene.addEmitter(this.particleEmitter);
         },
 
         update: function() {
@@ -61,6 +84,7 @@ game.module(
             
             this.emitter.update();
             this.foam.update();
+            this.particleEmitter.update();
 
             if (game.keyboard.down('RIGHT')) {
                 this.guenther.tiltHead((Math.PI * 2 / (1/this.rotSpeed) * game.system.delta));
@@ -71,6 +95,13 @@ game.module(
             if (game.keyboard.down('SPACE')) {
                 this.guenther.jump();
             }
+            if (game.keyboard.down('UP')) {
+                this.bottle.tiltBottle((Math.PI * 2 / (1/this.rotSpeed) * game.system.delta));
+            }
+            if (game.keyboard.down('DOWN')) {
+                this.bottle.tiltBottle(-(Math.PI * 2 / (1/this.rotSpeed) * game.system.delta));
+            }
+
         }
     });
 
