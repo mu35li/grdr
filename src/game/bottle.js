@@ -56,6 +56,7 @@ game.module('game.bottle')
 			this.particleEmitter.textures.push('beer2.png');
 			this.particleEmitter.addTo(game.scene.stage);
 			game.scene.addEmitter(this.particleEmitter);
+			this.counter = 0;
 
 		},
 
@@ -67,6 +68,10 @@ game.module('game.bottle')
 			var yBottle = (-Math.cos(this.bottle.rotation))*(this.x-220)+this.x;
 			this.particleEmitter.position.set(xBottle, yBottle);
 			this.particleEmitter.angle = this.bottle.rotation - Math.PI*0.5;
+			this.counter += game.system.delta;
+			if (this.counter > 0.5) {
+				this.counter -= 0.5;
+			}
 		},
 
 

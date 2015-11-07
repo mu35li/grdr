@@ -48,7 +48,6 @@ game.module('game.guenther')
 			var xBox = -Math.sin(this.head.rotation+1)*(67)+this.mittelpunktX;
 			var yBox = Math.cos(this.head.rotation+1)*(67)+this.mittelpunktY;
 			this.drinkBox.position.set(xBox, yBox);
-			console.log(yBox);	
 		},
 
 
