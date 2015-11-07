@@ -32,21 +32,27 @@ game.module('game.guenther')
 			
 			var shape = new game.Rectangle(this.width, this.height);
 
-			this.drinkBoxPoint = new game.Vector(this.head.position.x, this.head.position.y);
+			this.drinkBoxPoint = new game.Vector(this.head.position.x-60, this.head.position.y+35);
 			this.drinkBox = new game.Body({
 				position: this.drinkBoxPoint, 
 				shape: shape
 
 			});
-			
+			this.mittelpunktX = this.head.position.x;
+			this.mittelpunktY = this.head.position.y;
+
 		},
 
 		update: function() {
+			//sin(winkel)*radius+mittelpunkt
+			var xBox = -Math.sin(this.head.rotation+1)*(67)+this.mittelpunktX;
+			var yBox = Math.cos(this.head.rotation+1)*(67)+this.mittelpunktY;
+			this.drinkBox.position.set(xBox, yBox);
+			console.log(yBox);	
 		},
 
 
 		tiltHead: function(angle) {
-			console.log(this.head.rotation);	
 			if (((this.head.rotation + angle)<=2.4) && ((this.head.rotation + angle) >= -0.1)) {
 				this.head.rotation += angle;
 			}else if (this.head.rotation>2.4){
@@ -56,5 +62,5 @@ game.module('game.guenther')
 			}
 		}
 
-	})
-})
+	});
+});
