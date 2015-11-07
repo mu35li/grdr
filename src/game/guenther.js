@@ -10,6 +10,10 @@ game.module('game.guenther')
 			this.height = height;
 			this.jumpVel = 50;
 			this.sprite =  new game.Sprite('dude.png', this.x, this.y, {
+				anchor: {
+					x: 0.5,
+					y: 0.5
+				},
 				zIndex: 10
 			});
 
@@ -21,12 +25,13 @@ game.module('game.guenther')
 			
 			this.body = new game.Body({
 				mass: 0.0,
+				shape: shape,
 				position: {
 					x: this.x,
 					y: this.y
-				},
-				shape: shape
+				}
 			});
+
 		},
 
 		update: function() {
