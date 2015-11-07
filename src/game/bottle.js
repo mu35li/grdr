@@ -9,6 +9,9 @@ game.module('game.bottle')
 		beerTextures: ['beer.png', 'beer2.png'],
 		foamTextures: ['foam.png'],
 
+		maximumEmitterCount: 20,
+		maximumEmitterRate: 10,
+
 		init: function(x, y, width, height) {
 			this.initialPosX = x;
 			this.initialPosY = y;
@@ -54,13 +57,13 @@ game.module('game.bottle')
 			    active: true,
 			    angle: Math.PI*1.5,
 			    angleVar: 0.1,
-			    count: 20,
+			    count: 0,
 			    duration: 0,
 			    life: 3000,
 			    speed: 100,
 			    speedVar: 10,
 					startScale: 2,
-			    rate: 10,
+			    rate: 0,
 			    position: particleEmitterPoint,
 					positionVar: new game.Point(10, 10),
 					startScale: 2,
@@ -95,6 +98,9 @@ game.module('game.bottle')
 			var yBottle = (-Math.cos(this.bottle.rotation))*(190)+this.y  ;
 			this.particleEmitter.position.set(xBottle, yBottle);
 			this.particleEmitter.angle = this.bottle.rotation - Math.PI*0.5;
+			this.particleEmitter.count = this.maximumEmitterCount * Math.max(0, -Math.cos(this.bottle.rotation))
+			this.particleEmitter.rate = this.maximumEmitterRate * Math.max(0, -Math.cos(this.bottle.rotation))
+
 			this.counter += game.system.delta;
 			if (this.counter > 0.5) {
 				this.counter -= 0.5;
@@ -107,6 +113,9 @@ game.module('game.bottle')
 			this.body.velocity.add(-400, -300);
 			this.angularVelocity = 2 * Math.PI;
 			this.particleEmitter.textures = this.foamTextures;
+
+            // update number of finished bottles
+            game.scene.finished_bottles += 1;
 		},
 
 		tiltBottle: function(angle) {
