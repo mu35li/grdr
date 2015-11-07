@@ -16,7 +16,7 @@ game.module(
             this.world = new game.World();
 
             //instanciate the guenther
-            this.guenther = new game.Guenther(0,0,0,0);
+            this.guenther = new game.Guenther(100,100,100,100);
             // console.log(this.guenther);
             this.world.addBody(this.guenther.body);
 
