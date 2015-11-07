@@ -106,6 +106,9 @@ game.module('game.bottle')
 			this.body.velocity.add(-400, -300);
 			this.angularVelocity = 2 * Math.PI;
 			this.particleEmitter.textures = this.foamTextures;
+
+            // update number of finished bottles
+            game.scene.finished_bottles += 1;
 		},
 
 		tiltBottle: function(angle) {

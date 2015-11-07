@@ -3,6 +3,7 @@ game.module(
 )
 .require('game.guenther')
 .require('game.bottle')
+.require('game.drunkhandler')
 .body(function() {
 
     game.addAsset('logo.png');
@@ -14,6 +15,7 @@ game.module(
 
         init: function() {
             var regenwald = new game.Sprite('regenwald.jpg').center().addTo(this.stage);
+
             this.rotSpeed = 1;
 
             this.world = new game.World();
@@ -26,6 +28,11 @@ game.module(
             // console.log(this.guenther);
             this.world.addBody(this.guenther.drinkBox);
 
+            // declare our score-related variables
+            this.finished_bottles = 0;
+            this.score = 0;
+            this.drunkenness = 1;
+            this.drunkhandler = new game.DrunkHandler();
         },
 
         update: function() {
@@ -53,6 +60,7 @@ game.module(
                 this.bottle.tiltBottle(-(Math.PI * 2 / (1/this.rotSpeed*2) * game.system.delta));
             }
 
+            this.drunkhandler.update();
         },
 
         keyup: function(key) {
