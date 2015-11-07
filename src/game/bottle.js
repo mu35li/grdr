@@ -6,7 +6,13 @@ game.module('game.bottle')
 	game.addAsset('foam.png');
 
 	game.createClass('Bottle', {
+		beerTextures: ['beer.png', 'beer2.png'],
+		foamTextures: ['foam.png'],
+
 		init: function(x, y, width, height) {
+			this.initialPosX = x;
+			this.initialPosY = y;
+
 			this.x = x;
 			this.y = y;
 
@@ -60,13 +66,24 @@ game.module('game.bottle')
 					startScale: 2,
 					endScale: 2
 			});
-			this.particleEmitter.textures = ['beer.png', 'beer2.png'];
+			this.particleEmitter.textures = this.beerTextures;
 			this.particleEmitter.addTo(game.scene.stage);
 			game.scene.addEmitter(this.particleEmitter);
 
 		},
 
 		update: function() {
+			if (this.body.position.x < -500) {
+				this.body.position.x = this.initialPosX;
+				this.body.position.y = this.initialPosY;
+				this.body.mass = 0;
+				this.body.velocity.set(0, 0);
+				this.angularVelocity = 0;
+				this.bottle.rotation = 0;
+				this.particleEmitter.textures = this.beerTextures;
+			}
+
+
 			this.x = this.body.position.x;
 			this.y = this.body.position.y;
 			this.bottle.rotation += this.angularVelocity * game.system.delta;
@@ -83,7 +100,7 @@ game.module('game.bottle')
 			this.body.mass = 1;
 			this.body.velocity.add(-400, -300);
 			this.angularVelocity = 2 * Math.PI;
-			this.particleEmitter.textures = ['foam.png'];
+			this.particleEmitter.textures = this.foamTextures;
 		},
 
 		tiltBottle: function(angle) {
