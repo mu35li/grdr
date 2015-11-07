@@ -9,11 +9,7 @@ game.module('game.guenther')
 			this.width = width;
 			this.height = height;
 			this.jumpVel = 50;
-			this.sprite =  new game.Sprite('dude.png', x, y, {
-				anchor: {
-					x: 0,
-					y: 0,
-				},
+			this.sprite =  new game.Sprite('dude.png', this.x, this.y, {
 				zIndex: 10
 			});
 
@@ -24,7 +20,7 @@ game.module('game.guenther')
 			var shape = new game.Rectangle(this.width, this.height);
 			
 			this.body = new game.Body({
-				mass: 0.5,
+				mass: 0.0,
 				position: {
 					x: this.x,
 					y: this.y
@@ -44,7 +40,8 @@ game.module('game.guenther')
 		},
 
 		tiltHead: function(angle) {
-			this.body.rotation += angle;
+			console.log(angle);
+			this.sprite.rotation += angle;
 		}
 
 	})
