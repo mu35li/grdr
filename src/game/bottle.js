@@ -69,6 +69,7 @@ game.module('game.bottle')
 			this.particleEmitter.textures = this.beerTextures;
 			this.particleEmitter.addTo(game.scene.stage);
 			game.scene.addEmitter(this.particleEmitter);
+			this.counter = 0;
 
 		},
 
@@ -93,6 +94,10 @@ game.module('game.bottle')
 			var yBottle = (-Math.cos(this.bottle.rotation))*(190)+this.y  ;
 			this.particleEmitter.position.set(xBottle, yBottle);
 			this.particleEmitter.angle = this.bottle.rotation - Math.PI*0.5;
+			this.counter += game.system.delta;
+			if (this.counter > 0.5) {
+				this.counter -= 0.5;
+			}
 		},
 
 		getFreshDrink: function() {

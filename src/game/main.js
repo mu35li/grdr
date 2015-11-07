@@ -21,7 +21,7 @@ game.module(
             game.world = this.world;
 
             //instanciate the guenther
-            this.guenther = new game.Guenther(850,600,40,40);
+            this.guenther = new game.Guenther(850,600,35,35);
             this.bottle = new game.Bottle(400,400,100,100);
             // console.log(this.guenther);
             this.world.addBody(this.guenther.drinkBox);
