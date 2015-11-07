@@ -6,8 +6,6 @@ game.module(
 .body(function() {
 
     game.addAsset('logo.png');
-    game.addAsset('beer.png');
-    game.addAsset('foam.png');
     game.addAsset('regenwald.jpg');
 
     game.createScene('Main', {
@@ -21,10 +19,10 @@ game.module(
             this.world = new game.World();
 
             //instanciate the guenther
-            this.guenther = new game.Guenther(850,600,100,100);
+            this.guenther = new game.Guenther(850,600,50,50);
             this.bottle = new game.Bottle(400,400,100,100);
             // console.log(this.guenther);
-            this.world.addBody(this.guenther.body);
+            this.world.addBody(this.guenther.drinkBox);
 
         },
 
@@ -40,19 +38,16 @@ game.module(
             this.bottle.particleEmitter.update();
             this.bottle.update();
 
-            if (game.keyboard.down('RIGHT')) {
+            if (game.keyboard.down('Q')) {
                 this.guenther.tiltHead((Math.PI * 2 / (1/this.rotSpeed) * game.system.delta));
             }
-            if (game.keyboard.down('LEFT')) {
+            if (game.keyboard.down('O')) {
                 this.guenther.tiltHead(-(Math.PI * 2 / (1/this.rotSpeed) * game.system.delta));
             }
-            if (game.keyboard.down('SPACE')) {
-                this.guenther.jump();
-            }
-            if (game.keyboard.down('UP')) {
+            if (game.keyboard.down('W')) {
                 this.bottle.tiltBottle((Math.PI * 2 / (1/this.rotSpeed*2) * game.system.delta));
             }
-            if (game.keyboard.down('DOWN')) {
+            if (game.keyboard.down('P')) {
                 this.bottle.tiltBottle(-(Math.PI * 2 / (1/this.rotSpeed*2) * game.system.delta));
             }
 

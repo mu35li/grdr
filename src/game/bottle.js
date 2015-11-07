@@ -1,7 +1,8 @@
 game.module('game.bottle')
 .body(function() {
 	game.addAsset('bottle.png');
-	game.addAsset('foam.png');
+	game.addAsset('beer.png');
+	game.addAsset('beer2.png');
 
 	game.createClass('Bottle', {
 		init: function(x, y, width, height) {
@@ -41,16 +42,16 @@ game.module('game.bottle')
 			    active: true,
 			    angle: Math.PI*1.5,
 			    angleVar: 0.1,
-			    count: 100,
+			    count: 50,
 			    duration: 0,
-			    life: 5000,
+			    life: 2000,
 			    speed: 100,
 			    speedVar: 10,
-			    rate: 50,
+			    rate: 5,
 			    position: particleEmitterPoint
 			});
 			this.particleEmitter.textures.push('beer.png');
-			this.particleEmitter.textures.push('foam.png');
+			this.particleEmitter.textures.push('beer2.png');
 			this.particleEmitter.addTo(game.scene.stage);
 			game.scene.addEmitter(this.particleEmitter);
 
@@ -64,8 +65,6 @@ game.module('game.bottle')
 			var yBottle = (-Math.cos(this.bottle.rotation))*(this.x-220)+this.x;
 			this.particleEmitter.position.set(xBottle, yBottle);
 			this.particleEmitter.angle = this.bottle.rotation - Math.PI*0.5;
-			console.log(xBottle);
-			console.log(yBottle);
 		},
 
 

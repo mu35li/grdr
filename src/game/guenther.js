@@ -31,22 +31,17 @@ game.module('game.guenther')
 			this.head.addTo(game.scene.stage);
 			
 			var shape = new game.Rectangle(this.width, this.height);
-			
-			this.body = new game.Body({
-				mass: 0.0,
-				shape: shape,
-				position: {
-					x: this.x,
-					y: this.y
-				}
-			});
 
+			this.drinkBoxPoint = new game.Vector(this.head.position.x, this.head.position.y);
+			this.drinkBox = new game.Body({
+				position: this.drinkBoxPoint, 
+				shape: shape
+
+			});
+			
 		},
 
 		update: function() {
-			this.x = this.body.position.x;
-			this.y = this.body.position.y;
-			this.head.y = this.y;
 		},
 
 
