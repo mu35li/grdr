@@ -18,6 +18,8 @@ game.module(
 
             this.world = new game.World();
 
+            game.world = this.world;
+
             //instanciate the guenther
             this.guenther = new game.Guenther(850,600,50,50);
             this.bottle = new game.Bottle(400,400,100,100);
@@ -34,7 +36,7 @@ game.module(
             this.guenther.update();
             // console.log(this.guenther);
             // console.log("body pos: " + this.body.position.x + ", " + this.body.position.y);
-            
+
             this.bottle.particleEmitter.update();
             this.bottle.update();
 
@@ -51,6 +53,12 @@ game.module(
                 this.bottle.tiltBottle(-(Math.PI * 2 / (1/this.rotSpeed*2) * game.system.delta));
             }
 
+        },
+
+        keyup: function(key) {
+            if (key === 'SPACE') {
+                this.bottle.getFreshDrink();
+            }
         }
     });
 
