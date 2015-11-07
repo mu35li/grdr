@@ -1,6 +1,7 @@
 game.module(
     'game.main'
 )
+.require('game.guenther')
 .body(function() {
 
     game.addAsset('logo.png');
@@ -14,6 +15,7 @@ game.module(
             this.logo.center();
             this.rotSpeed = 1;
 
+            this.done = 0;
             this.world = new game.World();
 
             var body = new game.Body();
@@ -35,19 +37,32 @@ game.module(
             this.world.addBody(body);
 
             this.body = body;
+
+            this.guenther = new game.Guenther(10,10,200,200);
+            // console.log(this.guenther);
+            this.world.addBody(this.guenther.body);
+
+
+            // console.log(this.guenther);
         },
 
         update: function() {
             this.world.update();
+            // console.log(this.guenther.sprite);
+            // console.log(this.guenther.body.position);
 
-
-            console.log("body pos: " + this.body.position.x + ", " + this.body.position.y);
+            this.guenther.update();
+            // console.log(this.guenther);
+            // console.log("body pos: " + this.body.position.x + ", " + this.body.position.y);
 
             if (game.keyboard.down('RIGHT')) {
                 this.logo.rotation += (Math.PI * 2 / (1/this.rotSpeed) * game.system.delta);
             }
             if (game.keyboard.down('LEFT')) {
                 this.logo.rotation -= (Math.PI * 2 / (1/this.rotSpeed) * game.system.delta);
+            }
+            if (game.keyboard.down('SPACE')) {
+                this.guenther.jump();
             }
         }
     });
