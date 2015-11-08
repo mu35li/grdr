@@ -7,14 +7,22 @@ game.module(
 .require('game.testParticle')
 .body(function() {
 
+    // load some assets
+    // ... others are loaded elsewhere. because any other way would be too convenient
     game.addAsset('logo.png');
     game.addAsset('regenwald.jpg');
+
+    // load amazing music
+    game.addAudio('Krombacher.m4a', 'theme');
+    game.Audio.stopOnSceneChange = false;
 
     game.createScene('Main', {
         //backgroundColor: 0xb9bec7,
         backgroundImage: 0x000000,
 
         init: function() {
+            this.max_bottles = 10;
+
             var regenwald = new game.Sprite('regenwald.jpg').center().addTo(this.stage);
 
             this.rotSpeed = 1;
@@ -32,7 +40,18 @@ game.module(
             // declare our score-related variables
             this.finished_bottles = 0;
             this.score = 0;
-            this.drunkenness = 2;
+
+            // init highscore to 0
+            this.highscore = 0;
+
+            // see if we already have a highscore and overwrite it if we do
+            if (game.storage.has('highscore')) {
+                this.highscore = game.storage.get('highscore');
+            } else {
+                game.storage.set('highscore', 0);
+            }
+
+            this.drunkness = 0;
             this.drunkhandler = new game.DrunkHandler();
             this.counter = 0;
             this.testParticles = [];
@@ -43,7 +62,7 @@ game.module(
             this.score_text.addTo(this.stage);
 
             // display fill level (debug)
-            this.fill_text = new game.Text('Fill level: ' + this.bottle.fill_level, {fill: 'white'});
+            this.fill_text = new game.Text('Level: ' + this.max_bottles, {fill: 'white'});
             this.fill_text.position.set(400, 20);
             this.fill_text.addTo(this.stage);
 
@@ -52,6 +71,11 @@ game.module(
             this.controls_text = new game.Text('Controls: Q, W, O, P', {fill: 'white'});
             this.controls_text.position.set(700, 20);
             this.controls_text.addTo(this.stage);
+
+            // play some music
+            if (!game.audio.isMusicPlaying()) {
+                game.audio.playMusic('theme', true);
+            }
         },
 
         update: function() {
@@ -80,9 +104,10 @@ game.module(
             if (game.keyboard.down('P')) {
                 this.bottle.tiltBottle(-(Math.PI * 2 / (1/this.rotSpeed*2) * game.system.delta));
             }
-            if (game.keyboard.down('T')) {
-                this.bottle.testCollision();
-            }
+            // no longer needed, done automatically
+            //if (game.keyboard.down('T')) {
+            //    this.bottle.testCollision();
+            //}
 
             this.drunkhandler.update();
 
@@ -100,14 +125,38 @@ game.module(
             this.score_text.setText('Score: ' + this.score);
 
             // update fill display
-            this.fill_text.setText('Level: ' + this.bottle.fill_level);
-        },
+            this.fill_text.setText('Level: ' + this.finished_bottles);
 
-        keyup: function(key) {
-            if (key === 'SPACE') {
-                this.bottle.getFreshDrink();
+            // handle gameover scenario
+            if (this.finished_bottles >= this.max_bottles) {
+                // stop the music!
+                game.audio.stopMusic();
+
+                // clear everythin gaway 
+                this.clear();
+
+                // determine new highscore
+                this.highscore = Math.max(this.highscore, this.score);
+
+                // store new highscore
+                game.storage.set('highscore', this.highscore);
+
+                // create a little gameover screen
+                this.exit_text = new game.Text('Game Over!\nScore: ' + this.score + '\nHigh Score: ' + this.highscore, {fill: 'white'});
+                this.exit_text.position.set(500, 500);
+                this.exit_text.addTo(this.stage);
+
+                // ...and exit!
+                this.exit();
             }
         },
+
+        // we don't need this, it's done automatically when the bottle is empty
+        //keyup: function(key) {
+        //    if (key === 'SPACE') {
+        //        this.bottle.getFreshDrink();
+        //    }
+        //},
 
         // test stream for collision with guenther's mouth
         testCollision: function() {
