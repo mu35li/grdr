@@ -25,14 +25,14 @@ game.module(
 
             //instanciate the guenther
             this.guenther = new game.Guenther(850,600,35,35);
-            this.bottle = new game.Bottle(400,400,100,100);
+            this.bottle = new game.Bottle(450,400,100,100);
             // console.log(this.guenther);
             this.world.addBody(this.guenther.drinkBox);
 
             // declare our score-related variables
             this.finished_bottles = 0;
             this.score = 0;
-            this.drunkenness = 1;
+            this.drunkenness = 2;
             this.drunkhandler = new game.DrunkHandler();
             this.counter = 0;
             this.testParticles = [];
