@@ -161,7 +161,7 @@ game.module('game.bottle')
          * Tilt the bottle by the specified angle.
          **/
         tiltBottle: function(angle) {
-                this.bottle.rotation += angle;
+            this.bottle.rotation += angle;
         }
     });
 });
