@@ -4,6 +4,7 @@ game.module(
 .require('game.guenther')
 .require('game.bottle')
 .require('game.drunkhandler')
+.require('game.testParticle')
 .body(function() {
 
     game.addAsset('logo.png');
@@ -33,9 +34,12 @@ game.module(
             this.score = 0;
             this.drunkenness = 1;
             this.drunkhandler = new game.DrunkHandler();
+            this.counter = 0;
+            this.testParticles = [];
         },
 
         update: function() {
+            this._super();
             this.world.update();
             // console.log(this.guenther.sprite);
             // console.log(this.guenther.body.position);
@@ -64,12 +68,30 @@ game.module(
             }
 
             this.drunkhandler.update();
+
+
+            this.counter += game.system.delta;
+            if (this.counter > 0.02) {
+                this.testCollision();
+                console.log(this.score);
+                this.counter -= 0.02;
+            }
+            // for (var i = this.testParticles.length - 1; i >= 0; i--) {
+            //     var res = this.testParticles[i].update();
+            // }
         },
 
         keyup: function(key) {
             if (key === 'SPACE') {
                 this.bottle.getFreshDrink();
             }
+        },
+
+        testCollision: function() {
+            var testParticle = new game.TestParticle(0,0,0,0);
+            this.addObject(testParticle); 
+            this.testParticles.push(testParticle);
+
         }
     });
 

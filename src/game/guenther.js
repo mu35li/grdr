@@ -35,7 +35,9 @@ game.module('game.guenther')
 			this.drinkBoxPoint = new game.Vector(this.head.position.x-60, this.head.position.y+35);
 			this.drinkBox = new game.Body({
 				position: this.drinkBoxPoint, 
-				shape: shape
+				shape: shape,
+                collisionGroup:0,
+                collideAgainst: [1]
 
 			});
 			this.mittelpunktX = this.head.position.x;

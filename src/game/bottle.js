@@ -86,7 +86,6 @@ game.module('game.bottle')
 				this.bottle.rotation = 0;
 				this.particleEmitter.textures = this.beerTextures;
 			}
-            console.log(this.bottle.rotation);
 
 
 			this.x = this.body.position.x;
@@ -101,10 +100,6 @@ game.module('game.bottle')
 			this.particleEmitter.count = this.maximumEmitterCount * Math.max(0, -Math.cos(this.bottle.rotation))
 			this.particleEmitter.rate = this.maximumEmitterRate * Math.max(0, -Math.cos(this.bottle.rotation))
 
-			this.counter += game.system.delta;
-			if (this.counter > 0.5) {
-				this.counter -= 0.5;
-			}
 		},
 
 		getFreshDrink: function() {
@@ -120,25 +115,6 @@ game.module('game.bottle')
 
 		tiltBottle: function(angle) {
 				this.bottle.rotation += angle;
-		},
-
-        testCollision: function() {
-            var positionX = this.particleEmitter.position.x;
-            var positionY = this.particleEmitter.position.y;
-            var testShape = new game.Rectangle(5, 5);
-            var testBody = new game.Body({
-                mass: 0,
-                position: {
-                    x: positionX,
-                    y: positionY
-                },
-                shape: testShape
-            });
-            testBody.force.add(0,98.1);
-            var speedVector = new game.Vector(100,0).rotate(this.particleEmitter.angle);
-            testBody.velocity = speedVector;
-            game.world.addBody(testBody);
-        }
-
+		}
 	});
 });
