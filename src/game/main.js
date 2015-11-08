@@ -21,7 +21,7 @@ game.module(
         backgroundImage: 0x000000,
 
         init: function() {
-            this.max_bottles = 1;
+            this.max_bottles = 10;
 
             var regenwald = new game.Sprite('regenwald.jpg').center().addTo(this.stage);
 
