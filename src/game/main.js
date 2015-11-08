@@ -142,7 +142,7 @@ game.module(
                 game.storage.set('highscore', this.highscore);
 
                 // create a little gameover screen
-                this.exit_text = new game.Text('Game Over!\nScore: ' + this.score + '\nHigh Score: ' + this.highscore, {fill: 'white'});
+                this.exit_text = new game.Text('Game Over!\nScore: ' + this.score + 'm² Regenwald \nHigh Score: ' + this.highscore+' m² Regenwald', {fill: 'white'});
                 this.exit_text.position.set(300, 300);
                 this.exit_text.addTo(this.stage);
 

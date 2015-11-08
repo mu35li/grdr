@@ -88,6 +88,11 @@ game.module('game.bottle')
             this.particleEmitter.addTo(game.scene.stage);
             game.scene.addEmitter(this.particleEmitter);
             this.counter = 0;
+            this.sideTween = new game.Tween(this.body.position);
+            this.sideTween.to({x: 600}, 1500);
+            this.sideTween.repeat(100000);
+            this.sideTween.yoyo();
+            this.sideTween.start();
 
         },
 
@@ -102,6 +107,7 @@ game.module('game.bottle')
                 this.angularVelocity = 0;
                 this.bottle.rotation = 0;
                 this.particleEmitter.textures = this.beerTextures;
+                this.sideTween.resume();
             }
 
 
@@ -142,6 +148,7 @@ game.module('game.bottle')
          **/
         getFreshDrink: function() {
             //this.particleEmitter.active = false;
+            this.sideTween.pause();
             this.body.mass = 1;
             this.body.velocity.add(-400, -300);
             this.angularVelocity = 2 * Math.PI;
@@ -155,6 +162,7 @@ game.module('game.bottle')
 
             // increment drunkness level
             game.scene.drunkness += 1;
+
         },
 
         /**
@@ -162,6 +170,12 @@ game.module('game.bottle')
          **/
         tiltBottle: function(angle) {
             this.bottle.rotation += angle;
+        },
+
+        /**
+         * move bottle left and right
+         */
+        moveBottle: function(distance) {
         }
     });
 });
