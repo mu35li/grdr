@@ -49,6 +49,7 @@ game.module('game.testParticle')
 
         collide: function() {
             game.scene.score += 1;
+            game.scene.drunkness = game.scene.score/1000;
         }
 
     });

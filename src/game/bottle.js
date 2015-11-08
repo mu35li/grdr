@@ -161,7 +161,6 @@ game.module('game.bottle')
             this.fill_level = 1000;
 
             // increment drunkness level
-            game.scene.drunkness += game.scene.score/1000;
 
         },
 

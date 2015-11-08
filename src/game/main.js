@@ -23,7 +23,7 @@ game.module(
         init: function() {
             this.max_bottles = 10;
 
-            var regenwald = new game.Sprite('regenwald.jpg').center().addTo(this.stage);
+            this.regenwald = new game.Sprite('regenwald.jpg').center().addTo(this.stage);
 
             this.rotSpeed = 1;
 
@@ -76,6 +76,16 @@ game.module(
             if (!game.audio.isMusicPlaying()) {
                 game.audio.playMusic('theme', true);
             }
+
+
+            //filter
+            this.blurfilter = new game.PIXI.BlurFilter(); 
+            this.blurfilter.blur = 2*this.drunkness; 
+            this.bottle.bottle.filters = [this.blurfilter];
+            this.guenther.head.filters = [this.blurfilter];
+            this.guenther.neck.filters = [this.blurfilter];
+            this.regenwald.filters = [this.blurfilter];
+
         },
 
         update: function() {
@@ -109,7 +119,12 @@ game.module(
             //    this.bottle.testCollision();
             //}
 
+
             this.drunkhandler.update();
+            this.bottle.bottle.filters[0].blur = 2*this.drunkness;
+            this.guenther.head.filters[0].blur = 2*this.drunkness;
+            this.guenther.neck.filters[0].blur = 2*this.drunkness;
+            this.regenwald.filters[0].blur = 2*this.drunkness;
 
 
             this.counter += game.system.delta;
