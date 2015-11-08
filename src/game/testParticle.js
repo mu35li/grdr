@@ -1,6 +1,10 @@
 game.module('game.testParticle')
 .body(function() {
 
+    /**
+     * Test Particle class. It's not for testing purposes as in testing wether the game works,
+     * but rather for testing for collisions. Because we have sane naming conventions. Shut up.
+     **/
     game.createClass('TestParticle', {
         init: function(x, y, width, height) {
             this.x = x;
@@ -44,7 +48,7 @@ game.module('game.testParticle')
         },
 
         collide: function() {
-            game.scene.score += 10;
+            game.scene.score += 1;
         }
 
     });

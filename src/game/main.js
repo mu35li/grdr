@@ -36,6 +36,22 @@ game.module(
             this.drunkhandler = new game.DrunkHandler();
             this.counter = 0;
             this.testParticles = [];
+
+            // display text to display score
+            this.score_text = new game.Text('Score: ' + this.score, {fill: 'white'});
+            this.score_text.position.set(20, 20);
+            this.score_text.addTo(this.stage);
+
+            // display fill level (debug)
+            this.fill_text = new game.Text('Fill level: ' + this.bottle.fill_level, {fill: 'white'});
+            this.fill_text.position.set(400, 20);
+            this.fill_text.addTo(this.stage);
+
+            // display controls because maybe, just maybe, someone who wasn't involved in development
+            // might actually play this...
+            this.controls_text = new game.Text('Controls: Q, W, O, P', {fill: 'white'});
+            this.controls_text.position.set(700, 20);
+            this.controls_text.addTo(this.stage);
         },
 
         update: function() {
@@ -51,6 +67,7 @@ game.module(
             this.bottle.particleEmitter.update();
             this.bottle.update();
 
+            // enable player input
             if (game.keyboard.down('Q')) {
                 this.guenther.tiltHead((Math.PI * 2 / (1/this.rotSpeed) * game.system.delta));
             }
@@ -71,14 +88,19 @@ game.module(
 
 
             this.counter += game.system.delta;
-            if (this.counter > 0.02) {
+            if (this.counter > 0.05) {
                 this.testCollision();
-                console.log(this.score);
-                this.counter -= 0.02;
+                this.counter -= 0.05;
             }
             // for (var i = this.testParticles.length - 1; i >= 0; i--) {
             //     var res = this.testParticles[i].update();
             // }
+            
+            // update score display
+            this.score_text.setText('Score: ' + this.score);
+
+            // update fill display
+            this.fill_text.setText('Level: ' + this.bottle.fill_level);
         },
 
         keyup: function(key) {
@@ -87,6 +109,7 @@ game.module(
             }
         },
 
+        // test stream for collision with guenther's mouth
         testCollision: function() {
             var testParticle = new game.TestParticle(0,0,0,0);
             this.addObject(testParticle); 
