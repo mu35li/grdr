@@ -40,7 +40,7 @@ game.module('game.testParticle')
         },
 
         collide: function() {
-            console.log('collision');
+            game.scene.score += 10;
         }
 
     });
