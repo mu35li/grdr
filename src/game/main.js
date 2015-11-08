@@ -21,7 +21,7 @@ game.module(
         backgroundImage: 0x000000,
 
         init: function() {
-            this.max_bottles = 10;
+            this.max_bottles = 1;
 
             var regenwald = new game.Sprite('regenwald.jpg').center().addTo(this.stage);
 
@@ -140,9 +140,13 @@ game.module(
 
                 // store new highscore
                 game.storage.set('highscore', this.highscore);
+                game.scene.guenther.drinkBox.remove();
+                game.scene.removeObject(game.scene.guenther);
+                game.scene.bottle.body.remove();
+                game.scene.removeObject(game.scene.bottle);
 
                 // create a little gameover screen
-                this.exit_text = new game.Text('Game Over!\nScore: ' + this.score + 'm² Regenwald \nHigh Score: ' + this.highscore+' m² Regenwald', {fill: 'white'});
+                this.exit_text = new game.Text('Game Over!\nScore: ' + this.score + ' m² Regenwald \nHigh Score: ' + this.highscore+' m² Regenwald', {fill: 'white'});
                 this.exit_text.position.set(300, 300);
                 this.exit_text.addTo(this.stage);
 
