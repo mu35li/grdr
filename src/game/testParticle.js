@@ -22,6 +22,7 @@ game.module('game.testParticle')
                 collisionGroup: 1,
                 shape: this.testShape,
             });
+            if (particleEmitter.rate > 0) {
             this.body.force.add(0,98.1);
 
             var speedVector = new game.Vector(100,0).rotate(particleEmitter.angle);
@@ -29,6 +30,9 @@ game.module('game.testParticle')
             this.body.velocity = speedVector;
             this.body.collide = this.collide.bind(this);
             game.world.addBody(this.body);
+            }else{
+                
+            }
         },
 
         update: function() {
